@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Guess Game</title>
+<style>
+body { font-family: Arial; background:#111; color:#fff; text-align:center }
+button { padding:10px; margin-top:10px }
+</style>
+</head>
+<body>
+<h1>🎮 Guess The Number</h1>
+<input id="guess" placeholder="1-10" />
+<button onclick="play()">Play</button>
+<p id="result"></p>
+
+
+<script>
+function play() {
+fetch('/play', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ guess: document.getElementById('guess').value })
+})
+.then(res => res.json())
+.then(data => document.getElementById('result').innerText = data.result);
+}
+</script>
+</body>
+</html>
